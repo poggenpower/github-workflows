@@ -28,8 +28,8 @@ jobs:
           hide-progress: false
           format: 'table'
         env:
-          AQUA_KEY: "${{ secrets.aq_key }}"
-          AQUA_SECRET: "${{ secrets.aq_secret }}"
+          AQUA_KEY: "${{ secrets.AQUA_KEY }}"
+          AQUA_SECRET: "${{ secrets.AQUA_SECRET }}"
           TRIVY_RUN_AS_PLUGIN: "aqua"
           TRIGGERED_BY: "PR"
           GITHUB_TOKEN: "${{ github.token }}"
@@ -44,7 +44,7 @@ jobs:
           hide-progress: false
           format: 'table'
         env:
-          AQUA_KEY: "${{ secrets.aqua_key }}"
-          AQUA_SECRET: "${{ secrets.aqua_secret }}"
+          AQUA_KEY: "${{ secrets.AQUA_KEY }}"
+          AQUA_SECRET: "${{ secrets.AQUA_SECRET }}"
           TRIVY_RUN_AS_PLUGIN: 'aqua'
           TRIGGERED_BY: 'PUSH'
