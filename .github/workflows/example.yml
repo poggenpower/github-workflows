@@ -1,0 +1,21 @@
+name: "Trivy Scan"
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+  
+permissions: write-all
+
+jobs:
+  aqua-workflow:
+      uses: argon-gh-test/github-workflows/.github/workflows/aquasec-scan.yml@master
+      secrets:
+        gh_token: "${{ github.token }}"
+        aq_key: "${{ secrets.AQUA_KEY }}"
+        aq_secret: "${{ secrets.AQUA_SECRET }}"

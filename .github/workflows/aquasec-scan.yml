@@ -1,0 +1,50 @@
+name: "Trivy Scan"
+on:
+  workflow_call:
+    secrets:
+      gh_token:
+        required: true
+      aqua_key:
+        required: true
+      aqua_secret:
+        required: true
+
+permissions: write-all
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Trivy - PR
+        if: github.event_name == 'pull_request'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          security-checks: 'vuln,config,secret'
+          hide-progress: false
+          format: 'table'
+        env:
+          AQUA_KEY: "${{ secrets.aq_key }}"
+          AQUA_SECRET: "${{ secrets.aq_secret }}"
+          TRIVY_RUN_AS_PLUGIN: "aqua"
+          TRIGGERED_BY: "PR"
+          GITHUB_TOKEN: "${{ github.token }}"
+
+
+      - name: Run Trivy - PUSH
+        if: github.event_name != 'pull_request'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          security-checks: 'vuln,config,secret'
+          hide-progress: false
+          format: 'table'
+        env:
+          AQUA_KEY: "${{ secrets.aqua_key }}"
+          AQUA_SECRET: "${{ secrets.aqua_secret }}"
+          TRIVY_RUN_AS_PLUGIN: 'aqua'
+          TRIGGERED_BY: 'PUSH'
