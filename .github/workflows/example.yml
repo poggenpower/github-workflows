@@ -14,7 +14,7 @@ permissions: write-all
 
 jobs:
   aqua-workflow:
-      uses: argon-gh-test/github-workflows/.github/workflows/aquasec-scan.yml@master
+      uses: argon-gh-demo/github-workflows/.github/workflows/aquasec-scan.yml@master
       secrets:
         gh_token: "${{ github.token }}"
         aq_key: "${{ secrets.AQUA_KEY }}"
