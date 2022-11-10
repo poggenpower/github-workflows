@@ -21,9 +21,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run Trivy - PR
-        #This if statement allows the workflow to support both contexts - PR and PUSH, within the same definition
-        if: github.event_name == 'pull_request'
+      - name: Run Trivy 
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
@@ -34,20 +32,4 @@ jobs:
           AQUA_KEY: "${{ secrets.AQUA_KEY }}"
           AQUA_SECRET: "${{ secrets.AQUA_SECRET }}"
           TRIVY_RUN_AS_PLUGIN: "aqua"
-          TRIGGERED_BY: "PR"
           GITHUB_TOKEN: "${{ github.token }}"
-
-
-      - name: Run Trivy - PUSH
-        if: github.event_name != 'pull_request'
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          security-checks: 'vuln,config,secret'
-          hide-progress: false
-          format: 'table'
-        env:
-          AQUA_KEY: "${{ secrets.AQUA_KEY }}"
-          AQUA_SECRET: "${{ secrets.AQUA_SECRET }}"
-          TRIVY_RUN_AS_PLUGIN: 'aqua'
-          TRIGGERED_BY: 'PUSH'
