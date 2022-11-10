@@ -6,9 +6,9 @@ on:
     secrets:
       gh_token:
         required: true
-      aqua_key:
+      aq_key:
         required: true
-      aqua_secret:
+      aq_secret:
         required: true
 #Which permissions are needed
 permissions: write-all
