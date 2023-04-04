@@ -15,10 +15,7 @@ on:
       AQUA_SECRET:
         description: "Aqua Secret"
         required: true
-      GH_TOKEN:
-        description: "GitHub token"
-        required: true
-
+        
 jobs:
   aqua:
     runs-on: ubuntu-latest
