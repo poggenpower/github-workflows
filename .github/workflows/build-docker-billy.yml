@@ -21,7 +21,12 @@ on:
       GH_TOKEN:
         description: "GitHub token"
         required: true
-
+      DOCKERHUB_USERNAME:
+        description: "dockerhub username"
+        required: true
+      DOCKERHUB_TOKEN:
+        description: "dockerhub access token"
+        required: true
 jobs:
   aqua:
     runs-on: ubuntu-latest
