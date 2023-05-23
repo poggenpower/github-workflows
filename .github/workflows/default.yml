@@ -1,6 +1,8 @@
 name: Aqua
 on:
   push:
+    branches:
+    - main
 jobs:
   aqua:
     name: Aqua scanner
