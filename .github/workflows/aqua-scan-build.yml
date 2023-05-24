@@ -1,6 +1,5 @@
 name: Aqua Scanner
 on:
-  push:
   workflow_call:
     inputs:
       ARTIFACT_PATH:
