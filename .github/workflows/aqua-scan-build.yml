@@ -7,9 +7,9 @@ on:
         required: true
         type: string
       GH_TOKEN: 
-      description: "github token used in source pipeline"
-      required: true
-      type: string
+        description: "github token used in source pipeline"
+        required: true
+        type: string
     secrets:
       AQUA_KEY:
         description: "Aqua Key"
