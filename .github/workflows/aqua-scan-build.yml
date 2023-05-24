@@ -13,6 +13,12 @@ on:
       AQUA_SECRET:
         description: "Aqua Secret"
         required: true
+      DOCKERHUB_USERNAME:
+        description: "dockerhub username"
+        required: true
+      DOCKERHUB_TOKEN:
+        description: "dockerhub access token"
+        required: true
         
 jobs:
   aqua:
