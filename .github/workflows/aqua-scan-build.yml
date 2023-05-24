@@ -42,6 +42,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: "${{inputs.ARTIFACT_PATH}}:${{ github.sha }}"
       - name: Manifest Generation
         run: |
           export BILLY_SERVER=https://billy.codesec.aquasec.com
