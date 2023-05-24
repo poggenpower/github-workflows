@@ -6,10 +6,6 @@ on:
         description: "Path to artifact"
         required: true
         type: string
-      GH_TOKEN: 
-        description: "github token used in source pipeline"
-        required: true
-        type: string
     secrets:
       AQUA_KEY:
         description: "Aqua Key"
@@ -22,6 +18,9 @@ on:
         required: true
       DOCKERHUB_TOKEN:
         description: "dockerhub access token"
+        required: true
+      GH_TOKEN: 
+        description: "github token"
         required: true
 jobs:
   aqua:
