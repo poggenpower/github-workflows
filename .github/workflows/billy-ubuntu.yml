@@ -5,9 +5,11 @@ on:
       AQUA_URL:
         description: "Aqua URL"
         type: string
+        default: "https://api.supply-chain.cloud.aquasec.com"
       CSPM_URL:
         description: "CSPM URL"
         type: string
+        default: "https://api.cloudsploit.com"
       ARTIFACT_PATH:
         description: "artifact path"
         type: string
