@@ -1,0 +1,49 @@
+name: Aqua Scanner
+on:
+  workflow_call:
+    inputs:
+      ARTIFACT_PATH:
+        description: "Path to artifact"
+        required: true
+        type: string
+    secrets:
+      AQUA_KEY:
+        description: "Aqua Key"
+        required: true
+      AQUA_SECRET:
+        description: "Aqua Secret"
+        required: true
+      DOCKERHUB_USERNAME:
+        description: "dockerhub username"
+        required: true
+      DOCKERHUB_TOKEN:
+        description: "dockerhub access token"
+        required: true
+      GH_TOKEN: 
+        description: "github token"
+        required: true
+jobs:
+  aqua:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Aqua scanner
+        uses: docker://aquasec/aqua-scanner
+        with:
+          args: trivy fs --debug --scanners config,vuln,secret . --package-json --sast --reachability
+        env:
+          AQUA_KEY: ${{ secrets.AQUA_KEY }}
+          AQUA_SECRET: ${{ secrets.AQUA_SECRET }}
+          GITHUB_TOKEN: ${{ github.token }}
+          TRIVY_RUN_AS_PLUGIN: "aqua"
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: "${{inputs.ARTIFACT_PATH}}:${{ github.sha }}"
