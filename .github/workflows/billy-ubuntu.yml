@@ -10,6 +10,10 @@ on:
         description: "CSPM URL"
         type: string
         default: "https://api.cloudsploit.com"
+      REGISTRY_NAME:
+        description: "Registry to fetch the image from"
+        type: string
+        default: "docker.io"
       ARTIFACT_PATH:
         description: "artifact path"
         type: string
@@ -55,7 +59,7 @@ jobs:
             --access-token "${{ secrets.GH_TOKEN }}" \
             --aqua-key "${{ secrets.AQUA_KEY }}" \
             --aqua-secret "${{ secrets.AQUA_SECRET }}" \
-            --artifact-path "${{inputs.ARTIFACT_PATH}}:${{ github.sha }}"
+            --artifact-path "${{inputs.ARTIFACT_PATH}}"
         env:
           AQUA_URL: ${{ inputs.AQUA_URL }}
           CSPM_URL: ${{ inputs.CSPM_URL }}
