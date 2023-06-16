@@ -42,6 +42,7 @@ jobs:
       - name: Docker login
         uses: docker/login-action@v2
         with:
+          registry: ${{ inputs.REGISTRY_NAME }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Manifest Generation
@@ -59,7 +60,7 @@ jobs:
             --access-token "${{ secrets.GH_TOKEN }}" \
             --aqua-key "${{ secrets.AQUA_KEY }}" \
             --aqua-secret "${{ secrets.AQUA_SECRET }}" \
-            --artifact-path "${{inputs.ARTIFACT_PATH}}"
+            --artifact-path "${{ inputs.REGISTRY_NAME }}/${{inputs.ARTIFACT_PATH}}"
         env:
           AQUA_URL: ${{ inputs.AQUA_URL }}
           CSPM_URL: ${{ inputs.CSPM_URL }}
